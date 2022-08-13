@@ -19,6 +19,8 @@ LAPS_PATHFILE="/etc/paths.d/laps"
 LAPS_BIN="/usr/local/laps/macOSLAPS"
 LAPS_REPAIR="/usr/local/laps/macOSLAPS-repair"
 LAPS_FOLDER="/usr/local/laps"
+RECEIPT_FILE="/var/db/receipts/edu.psu.macOSLAPS.bom"
+RECEIPT_PLIST="/var/db/receipts/edu.psu.macOSLAPS.plist"
 
 
 # If the LD exists
@@ -60,6 +62,18 @@ if [ -d "$LAPS_FOLDER" ];
 then
    echo "deleting local folder"
    /bin/rmdir "$LAPS_FOLDER"
+fi
+
+if [ -f "$RECEIPT_FILE" ];
+then
+   echo "deleting receipt bom file"
+   /bin/rm -f "$RECEIPT_FILE"
+fi
+
+if [ -f "$RECEIPT_PLIST" ];
+then
+   echo "deleting receipt plist"
+   /bin/rm -f "$RECEIPT_PLIST"
 fi
 
 exit 0
