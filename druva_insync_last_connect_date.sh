@@ -1,8 +1,8 @@
 #!/bin/bash
 
-loggedinuser=$(stat -f %Su /dev/console)
+loggedInUser=$( scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }' )
 
-configfile="/Users/$loggedinuser/Library/Application Support/inSync/inSync.cfg"
+configfile="/Users/$loggedInUser/Library/Application Support/inSync/inSync.cfg"
 
 if [[ -f "$configfile" ]]; then
    lastconnect=$(grep -w LAST_CONNECT "$configfile" | awk '{print $NF}' | awk -F"." '{print $1}')
